@@ -1,0 +1,1433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms version="1.6.3.2.1">
+	<form labelPlacement="top_label" useCurrentUserAsAuthor="1" postAuthor="1" postCategory="1" postFormat="0" postStatus="pending">
+		<title><![CDATA[Post GF Form data to Events Calendar Pro]]></title>
+		<description><![CDATA[Create front-end submission forms by formatting GF Form data for Events Calendar Pro API. This boilerplate form should be used with the code available at http://anthonydispezio.com/blog/gf-ecp-frontend-submission/]]></description>
+		<confirmation type="message">
+			<message><![CDATA[Thanks for contacting us! We will get in touch with you shortly.]]></message>
+		</confirmation>
+		<button type="text">
+			<text><![CDATA[Submit]]></text>
+		</button>
+		<fields>
+			<field id="1" isRequired="1" size="medium" type="post_title">
+				<label><![CDATA[Event Name]]></label>
+				<saveAsCPT><![CDATA[tribe_events]]></saveAsCPT>
+			</field>
+			<field id="2" isRequired="1" size="medium" type="post_content">
+				<label><![CDATA[Event Description]]></label>
+			</field>
+			<field id="3" isRequired="1" size="medium" type="post_custom_field" postCustomFieldName="_EventAllDay" inputType="radio" enableChoiceValue="1">
+				<label><![CDATA[All day event?]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Yes]]></text>
+						<value><![CDATA[yes]]></value>
+					</choice>
+					<choice isSelected="1">
+						<text><![CDATA[No]]></text>
+						<value><![CDATA[no]]></value>
+					</choice>
+				</choices>
+			</field>
+			<field id="4" isRequired="1" size="medium" type="date" calendarIconType="calendar" dateType="datepicker" dateFormat="ymd_dash">
+				<label><![CDATA[Start Date]]></label>
+			</field>
+			<field id="5" isRequired="1" size="medium" type="time">
+				<label><![CDATA[Start Time]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="3" operator="is">
+							<value><![CDATA[no]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="6" isRequired="1" size="medium" type="date" calendarIconType="calendar" dateType="datepicker" dateFormat="ymd_dash">
+				<label><![CDATA[End Date]]></label>
+			</field>
+			<field id="7" isRequired="1" size="medium" type="time">
+				<label><![CDATA[End Time]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="3" operator="is">
+							<value><![CDATA[no]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="8" size="medium" type="select">
+				<label><![CDATA[Recurrence]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[None]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Every Day]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Every Week]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Every Month]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Every Year]]></text>
+					</choice>
+				</choices>
+			</field>
+			<field id="9" isRequired="1" size="medium" type="select" enableChoiceValue="1">
+				<label><![CDATA[When should the recurrence end?]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[On a specific date]]></text>
+						<value><![CDATA[On]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[After a certain number of occurrences]]></text>
+						<value><![CDATA[After]]></value>
+					</choice>
+				</choices>
+				<conditionalLogic actionType="hide" logicType="all">
+					<rules>
+						<rule fieldId="8" operator="is">
+							<value><![CDATA[None]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="10" isRequired="1" size="medium" type="date" calendarIconType="calendar" dateType="datepicker" dateFormat="ymd_dash">
+				<label><![CDATA[End the event recurrence on]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="9" operator="is">
+							<value><![CDATA[On]]></value>
+						</rule>
+						<rule fieldId="8" operator="isnot">
+							<value><![CDATA[None]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="11" isRequired="1" size="medium" type="number" rangeMin="1" numberFormat="decimal_dot">
+				<label><![CDATA[After how many days should the recurrence end?]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="8" operator="is">
+							<value><![CDATA[Every Day]]></value>
+						</rule>
+						<rule fieldId="9" operator="is">
+							<value><![CDATA[After]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="12" isRequired="1" size="medium" type="number" rangeMin="1" numberFormat="decimal_dot">
+				<label><![CDATA[After how many weeks should the recurrence end?]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="8" operator="is">
+							<value><![CDATA[Every Week]]></value>
+						</rule>
+						<rule fieldId="9" operator="is">
+							<value><![CDATA[After]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="13" isRequired="1" size="medium" type="number" rangeMin="1" numberFormat="decimal_dot">
+				<label><![CDATA[After how many months should the recurrence end?]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="8" operator="is">
+							<value><![CDATA[Every Month]]></value>
+						</rule>
+						<rule fieldId="9" operator="is">
+							<value><![CDATA[After]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="14" isRequired="1" size="medium" type="number" rangeMin="1" numberFormat="decimal_dot">
+				<label><![CDATA[After how many years should the recurrence end?]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="8" operator="is">
+							<value><![CDATA[Every Year]]></value>
+						</rule>
+						<rule fieldId="9" operator="is">
+							<value><![CDATA[After]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="15" isRequired="1" size="medium" type="select">
+				<label><![CDATA[Event Category]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[-- select a Event Category --]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Art]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Conventions &amp; Expos]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Event]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Food]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[--Wine]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[History]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Music]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Other]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Philanthropy]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Places]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[--Family Fun]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[--Gardens]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[--Nature]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[--Shopping]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Seasonal: Autumn/Fall]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Seasonal: Spring]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Seasonal: Summer]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Sports]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Theater]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Traditions]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Uncategorized]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Winter]]></text>
+					</choice>
+				</choices>
+				<populateTaxonomy><![CDATA[tribe_events_cat]]></populateTaxonomy>
+			</field>
+			<field id="16" size="medium" type="post_custom_field" postCustomFieldName="_EventCost" inputType="text">
+				<description><![CDATA[Leave blank to hide the field. Enter a 0 for events that are free.]]></description>
+				<label><![CDATA[Event Cost]]></label>
+			</field>
+			<field id="17" size="medium" type="html" displayOnly="1">
+				<content><![CDATA[<h2>Location Details</h2>]]></content>
+				<label><![CDATA[HTML Block]]></label>
+			</field>
+			<field id="18" isRequired="1" size="medium" type="post_custom_field" postCustomFieldName="_VenueVenue" inputType="text">
+				<label><![CDATA[Venue Name]]></label>
+			</field>
+			<field id="19" size="medium" type="post_custom_field" postCustomFieldName="_VenueAddress" inputType="text">
+				<label><![CDATA[Street Address]]></label>
+			</field>
+			<field id="20" size="medium" type="post_custom_field" postCustomFieldName="_VenueCity" inputType="text">
+				<label><![CDATA[City/Town]]></label>
+			</field>
+			<field id="21" size="medium" type="post_custom_field" postCustomFieldName="_VenueCountry" inputType="select" enableChoiceValue="1">
+				<label><![CDATA[Country]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Afghanistan]]></text>
+						<value><![CDATA[Afghanistan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Albania]]></text>
+						<value><![CDATA[Albania]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Algeria]]></text>
+						<value><![CDATA[Algeria]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[American Samoa]]></text>
+						<value><![CDATA[American Samoa]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Andorra]]></text>
+						<value><![CDATA[Andorra]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Angola]]></text>
+						<value><![CDATA[Angola]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Antigua and Barbuda]]></text>
+						<value><![CDATA[Antigua and Barbuda]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Argentina]]></text>
+						<value><![CDATA[Argentina]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Armenia]]></text>
+						<value><![CDATA[Armenia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Australia]]></text>
+						<value><![CDATA[Australia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Austria]]></text>
+						<value><![CDATA[Austria]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Azerbaijan]]></text>
+						<value><![CDATA[Azerbaijan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bahamas]]></text>
+						<value><![CDATA[Bahamas]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bahrain]]></text>
+						<value><![CDATA[Bahrain]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bangladesh]]></text>
+						<value><![CDATA[Bangladesh]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Barbados]]></text>
+						<value><![CDATA[Barbados]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Belarus]]></text>
+						<value><![CDATA[Belarus]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Belgium]]></text>
+						<value><![CDATA[Belgium]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Belize]]></text>
+						<value><![CDATA[Belize]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Benin]]></text>
+						<value><![CDATA[Benin]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bermuda]]></text>
+						<value><![CDATA[Bermuda]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bhutan]]></text>
+						<value><![CDATA[Bhutan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bolivia]]></text>
+						<value><![CDATA[Bolivia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bosnia and Herzegovina]]></text>
+						<value><![CDATA[Bosnia and Herzegovina]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Botswana]]></text>
+						<value><![CDATA[Botswana]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Brazil]]></text>
+						<value><![CDATA[Brazil]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Brunei]]></text>
+						<value><![CDATA[Brunei]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Bulgaria]]></text>
+						<value><![CDATA[Bulgaria]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Burkina Faso]]></text>
+						<value><![CDATA[Burkina Faso]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Burundi]]></text>
+						<value><![CDATA[Burundi]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Cambodia]]></text>
+						<value><![CDATA[Cambodia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Cameroon]]></text>
+						<value><![CDATA[Cameroon]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Canada]]></text>
+						<value><![CDATA[Canada]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Cape Verde]]></text>
+						<value><![CDATA[Cape Verde]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Central African Republic]]></text>
+						<value><![CDATA[Central African Republic]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Chad]]></text>
+						<value><![CDATA[Chad]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Chile]]></text>
+						<value><![CDATA[Chile]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[China]]></text>
+						<value><![CDATA[China]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Colombia]]></text>
+						<value><![CDATA[Colombia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Comoros]]></text>
+						<value><![CDATA[Comoros]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Congo, Democratic Republic of the]]></text>
+						<value><![CDATA[Congo, Democratic Republic of the]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Congo, Republic of the]]></text>
+						<value><![CDATA[Congo, Republic of the]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Costa Rica]]></text>
+						<value><![CDATA[Costa Rica]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[C&ocirc;te d'Ivoire]]></text>
+						<value><![CDATA[C&ocirc;te d'Ivoire]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Croatia]]></text>
+						<value><![CDATA[Croatia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Cuba]]></text>
+						<value><![CDATA[Cuba]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Cyprus]]></text>
+						<value><![CDATA[Cyprus]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Czech Republic]]></text>
+						<value><![CDATA[Czech Republic]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Denmark]]></text>
+						<value><![CDATA[Denmark]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Djibouti]]></text>
+						<value><![CDATA[Djibouti]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Dominica]]></text>
+						<value><![CDATA[Dominica]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Dominican Republic]]></text>
+						<value><![CDATA[Dominican Republic]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[East Timor]]></text>
+						<value><![CDATA[East Timor]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ecuador]]></text>
+						<value><![CDATA[Ecuador]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Egypt]]></text>
+						<value><![CDATA[Egypt]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[El Salvador]]></text>
+						<value><![CDATA[El Salvador]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Equatorial Guinea]]></text>
+						<value><![CDATA[Equatorial Guinea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Eritrea]]></text>
+						<value><![CDATA[Eritrea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Estonia]]></text>
+						<value><![CDATA[Estonia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ethiopia]]></text>
+						<value><![CDATA[Ethiopia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Fiji]]></text>
+						<value><![CDATA[Fiji]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Finland]]></text>
+						<value><![CDATA[Finland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[France]]></text>
+						<value><![CDATA[France]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Gabon]]></text>
+						<value><![CDATA[Gabon]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Gambia]]></text>
+						<value><![CDATA[Gambia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Georgia]]></text>
+						<value><![CDATA[Georgia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Germany]]></text>
+						<value><![CDATA[Germany]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ghana]]></text>
+						<value><![CDATA[Ghana]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Greece]]></text>
+						<value><![CDATA[Greece]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Greenland]]></text>
+						<value><![CDATA[Greenland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Grenada]]></text>
+						<value><![CDATA[Grenada]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Guam]]></text>
+						<value><![CDATA[Guam]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Guatemala]]></text>
+						<value><![CDATA[Guatemala]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Guinea]]></text>
+						<value><![CDATA[Guinea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Guinea-Bissau]]></text>
+						<value><![CDATA[Guinea-Bissau]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Guyana]]></text>
+						<value><![CDATA[Guyana]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Haiti]]></text>
+						<value><![CDATA[Haiti]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Honduras]]></text>
+						<value><![CDATA[Honduras]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Hong Kong]]></text>
+						<value><![CDATA[Hong Kong]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Hungary]]></text>
+						<value><![CDATA[Hungary]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Iceland]]></text>
+						<value><![CDATA[Iceland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[India]]></text>
+						<value><![CDATA[India]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Indonesia]]></text>
+						<value><![CDATA[Indonesia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Iran]]></text>
+						<value><![CDATA[Iran]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Iraq]]></text>
+						<value><![CDATA[Iraq]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ireland]]></text>
+						<value><![CDATA[Ireland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Israel]]></text>
+						<value><![CDATA[Israel]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Italy]]></text>
+						<value><![CDATA[Italy]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Jamaica]]></text>
+						<value><![CDATA[Jamaica]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Japan]]></text>
+						<value><![CDATA[Japan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Jordan]]></text>
+						<value><![CDATA[Jordan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kazakhstan]]></text>
+						<value><![CDATA[Kazakhstan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kenya]]></text>
+						<value><![CDATA[Kenya]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kiribati]]></text>
+						<value><![CDATA[Kiribati]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[North Korea]]></text>
+						<value><![CDATA[North Korea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[South Korea]]></text>
+						<value><![CDATA[South Korea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kuwait]]></text>
+						<value><![CDATA[Kuwait]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kyrgyzstan]]></text>
+						<value><![CDATA[Kyrgyzstan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Laos]]></text>
+						<value><![CDATA[Laos]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Latvia]]></text>
+						<value><![CDATA[Latvia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Lebanon]]></text>
+						<value><![CDATA[Lebanon]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Lesotho]]></text>
+						<value><![CDATA[Lesotho]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Liberia]]></text>
+						<value><![CDATA[Liberia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Libya]]></text>
+						<value><![CDATA[Libya]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Liechtenstein]]></text>
+						<value><![CDATA[Liechtenstein]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Lithuania]]></text>
+						<value><![CDATA[Lithuania]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Luxembourg]]></text>
+						<value><![CDATA[Luxembourg]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Macedonia]]></text>
+						<value><![CDATA[Macedonia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Madagascar]]></text>
+						<value><![CDATA[Madagascar]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Malawi]]></text>
+						<value><![CDATA[Malawi]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Malaysia]]></text>
+						<value><![CDATA[Malaysia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Maldives]]></text>
+						<value><![CDATA[Maldives]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mali]]></text>
+						<value><![CDATA[Mali]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Malta]]></text>
+						<value><![CDATA[Malta]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Marshall Islands]]></text>
+						<value><![CDATA[Marshall Islands]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mauritania]]></text>
+						<value><![CDATA[Mauritania]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mauritius]]></text>
+						<value><![CDATA[Mauritius]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mexico]]></text>
+						<value><![CDATA[Mexico]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Micronesia]]></text>
+						<value><![CDATA[Micronesia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Moldova]]></text>
+						<value><![CDATA[Moldova]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Monaco]]></text>
+						<value><![CDATA[Monaco]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mongolia]]></text>
+						<value><![CDATA[Mongolia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Montenegro]]></text>
+						<value><![CDATA[Montenegro]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Morocco]]></text>
+						<value><![CDATA[Morocco]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mozambique]]></text>
+						<value><![CDATA[Mozambique]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Myanmar]]></text>
+						<value><![CDATA[Myanmar]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Namibia]]></text>
+						<value><![CDATA[Namibia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nauru]]></text>
+						<value><![CDATA[Nauru]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nepal]]></text>
+						<value><![CDATA[Nepal]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Netherlands]]></text>
+						<value><![CDATA[Netherlands]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[New Zealand]]></text>
+						<value><![CDATA[New Zealand]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nicaragua]]></text>
+						<value><![CDATA[Nicaragua]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Niger]]></text>
+						<value><![CDATA[Niger]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nigeria]]></text>
+						<value><![CDATA[Nigeria]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Norway]]></text>
+						<value><![CDATA[Norway]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Northern Mariana Islands]]></text>
+						<value><![CDATA[Northern Mariana Islands]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Oman]]></text>
+						<value><![CDATA[Oman]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Pakistan]]></text>
+						<value><![CDATA[Pakistan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Palau]]></text>
+						<value><![CDATA[Palau]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Palestine]]></text>
+						<value><![CDATA[Palestine]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Panama]]></text>
+						<value><![CDATA[Panama]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Papua New Guinea]]></text>
+						<value><![CDATA[Papua New Guinea]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Paraguay]]></text>
+						<value><![CDATA[Paraguay]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Peru]]></text>
+						<value><![CDATA[Peru]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Philippines]]></text>
+						<value><![CDATA[Philippines]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Poland]]></text>
+						<value><![CDATA[Poland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Portugal]]></text>
+						<value><![CDATA[Portugal]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Puerto Rico]]></text>
+						<value><![CDATA[Puerto Rico]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Qatar]]></text>
+						<value><![CDATA[Qatar]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Romania]]></text>
+						<value><![CDATA[Romania]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Russia]]></text>
+						<value><![CDATA[Russia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Rwanda]]></text>
+						<value><![CDATA[Rwanda]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Saint Kitts and Nevis]]></text>
+						<value><![CDATA[Saint Kitts and Nevis]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Saint Lucia]]></text>
+						<value><![CDATA[Saint Lucia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Saint Vincent and the Grenadines]]></text>
+						<value><![CDATA[Saint Vincent and the Grenadines]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Samoa]]></text>
+						<value><![CDATA[Samoa]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[San Marino]]></text>
+						<value><![CDATA[San Marino]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sao Tome and Principe]]></text>
+						<value><![CDATA[Sao Tome and Principe]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Saudi Arabia]]></text>
+						<value><![CDATA[Saudi Arabia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Senegal]]></text>
+						<value><![CDATA[Senegal]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Serbia and Montenegro]]></text>
+						<value><![CDATA[Serbia and Montenegro]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Seychelles]]></text>
+						<value><![CDATA[Seychelles]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sierra Leone]]></text>
+						<value><![CDATA[Sierra Leone]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Singapore]]></text>
+						<value><![CDATA[Singapore]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Slovakia]]></text>
+						<value><![CDATA[Slovakia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Slovenia]]></text>
+						<value><![CDATA[Slovenia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Solomon Islands]]></text>
+						<value><![CDATA[Solomon Islands]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Somalia]]></text>
+						<value><![CDATA[Somalia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[South Africa]]></text>
+						<value><![CDATA[South Africa]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Spain]]></text>
+						<value><![CDATA[Spain]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sri Lanka]]></text>
+						<value><![CDATA[Sri Lanka]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sudan]]></text>
+						<value><![CDATA[Sudan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sudan, South]]></text>
+						<value><![CDATA[Sudan, South]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Suriname]]></text>
+						<value><![CDATA[Suriname]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Swaziland]]></text>
+						<value><![CDATA[Swaziland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Sweden]]></text>
+						<value><![CDATA[Sweden]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Switzerland]]></text>
+						<value><![CDATA[Switzerland]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Syria]]></text>
+						<value><![CDATA[Syria]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Taiwan]]></text>
+						<value><![CDATA[Taiwan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tajikistan]]></text>
+						<value><![CDATA[Tajikistan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tanzania]]></text>
+						<value><![CDATA[Tanzania]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Thailand]]></text>
+						<value><![CDATA[Thailand]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Togo]]></text>
+						<value><![CDATA[Togo]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tonga]]></text>
+						<value><![CDATA[Tonga]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Trinidad and Tobago]]></text>
+						<value><![CDATA[Trinidad and Tobago]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tunisia]]></text>
+						<value><![CDATA[Tunisia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Turkey]]></text>
+						<value><![CDATA[Turkey]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Turkmenistan]]></text>
+						<value><![CDATA[Turkmenistan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tuvalu]]></text>
+						<value><![CDATA[Tuvalu]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Uganda]]></text>
+						<value><![CDATA[Uganda]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ukraine]]></text>
+						<value><![CDATA[Ukraine]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[United Arab Emirates]]></text>
+						<value><![CDATA[United Arab Emirates]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[United Kingdom]]></text>
+						<value><![CDATA[United Kingdom]]></value>
+					</choice>
+					<choice isSelected="1">
+						<text><![CDATA[United States]]></text>
+						<value><![CDATA[United States]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Uruguay]]></text>
+						<value><![CDATA[Uruguay]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Uzbekistan]]></text>
+						<value><![CDATA[Uzbekistan]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Vanuatu]]></text>
+						<value><![CDATA[Vanuatu]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Vatican City]]></text>
+						<value><![CDATA[Vatican City]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Venezuela]]></text>
+						<value><![CDATA[Venezuela]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Vietnam]]></text>
+						<value><![CDATA[Vietnam]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Virgin Islands, British]]></text>
+						<value><![CDATA[Virgin Islands, British]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Virgin Islands, U.S.]]></text>
+						<value><![CDATA[Virgin Islands, U.S.]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Yemen]]></text>
+						<value><![CDATA[Yemen]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Zambia]]></text>
+						<value><![CDATA[Zambia]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Zimbabwe]]></text>
+						<value><![CDATA[Zimbabwe]]></value>
+					</choice>
+				</choices>
+			</field>
+			<field id="22" size="medium" type="post_custom_field" postCustomFieldName="_VenueState" inputType="text">
+				<label><![CDATA[State or Province]]></label>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="21" operator="isnot">
+							<value><![CDATA[United States]]></value>
+						</rule>
+						<rule fieldId="21" operator="isnot">
+							<value><![CDATA[Canada]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="23" size="medium" type="post_custom_field" postCustomFieldName="_VenueState" inputType="select" enableChoiceValue="1">
+				<label><![CDATA[State]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Alabama]]></text>
+						<value><![CDATA[AL]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Alaska]]></text>
+						<value><![CDATA[AK]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Arizona]]></text>
+						<value><![CDATA[AZ]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Arkansas]]></text>
+						<value><![CDATA[AR]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[California]]></text>
+						<value><![CDATA[CA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Colorado]]></text>
+						<value><![CDATA[CO]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Connecticut]]></text>
+						<value><![CDATA[CT]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Delaware]]></text>
+						<value><![CDATA[DE]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[District of Columbia]]></text>
+						<value><![CDATA[DC]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Florida]]></text>
+						<value><![CDATA[FL]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Georgia]]></text>
+						<value><![CDATA[GA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Hawaii]]></text>
+						<value><![CDATA[HI]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Idaho]]></text>
+						<value><![CDATA[ID]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Illinois]]></text>
+						<value><![CDATA[IL]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Indiana]]></text>
+						<value><![CDATA[IN]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Iowa]]></text>
+						<value><![CDATA[IA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kansas]]></text>
+						<value><![CDATA[KS]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Kentucky]]></text>
+						<value><![CDATA[KY]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Louisiana]]></text>
+						<value><![CDATA[LA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Maine]]></text>
+						<value><![CDATA[ME]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Maryland]]></text>
+						<value><![CDATA[MD]]></value>
+					</choice>
+					<choice isSelected="1">
+						<text><![CDATA[Massachusetts]]></text>
+						<value><![CDATA[MA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Michigan]]></text>
+						<value><![CDATA[MI]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Minnesota]]></text>
+						<value><![CDATA[MN]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Mississippi]]></text>
+						<value><![CDATA[MS]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Missouri]]></text>
+						<value><![CDATA[MO]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Montana]]></text>
+						<value><![CDATA[MT]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nebraska]]></text>
+						<value><![CDATA[NE]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Nevada]]></text>
+						<value><![CDATA[NV]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[New Hampshire]]></text>
+						<value><![CDATA[NH]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[New Jersey]]></text>
+						<value><![CDATA[NJ]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[New Mexico]]></text>
+						<value><![CDATA[NM]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[New York]]></text>
+						<value><![CDATA[NY]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[North Carolina]]></text>
+						<value><![CDATA[NC]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[North Dakota]]></text>
+						<value><![CDATA[ND]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Ohio]]></text>
+						<value><![CDATA[OH]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Oklahoma]]></text>
+						<value><![CDATA[OK]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Oregon]]></text>
+						<value><![CDATA[OR]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Pennsylvania]]></text>
+						<value><![CDATA[PA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Rhode Island]]></text>
+						<value><![CDATA[RI]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[South Carolina]]></text>
+						<value><![CDATA[SC]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[South Dakota]]></text>
+						<value><![CDATA[SD]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Tennessee]]></text>
+						<value><![CDATA[TN]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Texas]]></text>
+						<value><![CDATA[TX]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Utah]]></text>
+						<value><![CDATA[UT]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Vermont]]></text>
+						<value><![CDATA[VT]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Virginia]]></text>
+						<value><![CDATA[VA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Washington]]></text>
+						<value><![CDATA[WA]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[West Virginia]]></text>
+						<value><![CDATA[WV]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Wisconsin]]></text>
+						<value><![CDATA[WI]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[Wyoming]]></text>
+						<value><![CDATA[WY]]></value>
+					</choice>
+				</choices>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="21" operator="is">
+							<value><![CDATA[United States]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="24" size="medium" type="post_custom_field" postCustomFieldName="_VenueState" inputType="select">
+				<label><![CDATA[Province/Territory]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Alberta]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[British Columbia]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Manitoba]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[New Brunswick]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Newfoundland & Labrador]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Northwest Territories]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Nova Scotia]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Nunavut]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Ontario]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Prince Edward Island]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Quebec]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Saskatchewan]]></text>
+					</choice>
+					<choice>
+						<text><![CDATA[Yukon]]></text>
+					</choice>
+				</choices>
+				<conditionalLogic actionType="show" logicType="all">
+					<rules>
+						<rule fieldId="21" operator="is">
+							<value><![CDATA[Canada]]></value>
+						</rule>
+					</rules>
+				</conditionalLogic>
+			</field>
+			<field id="25" size="medium" type="post_custom_field" postCustomFieldName="_VenueZip" inputType="text">
+				<label><![CDATA[Zip/Postal Code]]></label>
+			</field>
+			<field id="36" size="medium" type="post_custom_field" postCustomFieldName="_VenuePhone" inputType="phone" phoneFormat="standard">
+				<label><![CDATA[Phone]]></label>
+			</field>
+			<field id="26" size="medium" type="post_custom_field" postCustomFieldName="_EventShowMapLink" inputType="radio" enableChoiceValue="1">
+				<label><![CDATA[Show Google Map link?]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Yes]]></text>
+						<value><![CDATA[1]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[No]]></text>
+						<value><![CDATA[0]]></value>
+					</choice>
+				</choices>
+			</field>
+			<field id="27" size="medium" type="post_custom_field" postCustomFieldName="_EventShowMap" inputType="radio" enableChoiceValue="1">
+				<label><![CDATA[Show Google Map?]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Yes]]></text>
+						<value><![CDATA[1]]></value>
+					</choice>
+					<choice>
+						<text><![CDATA[No]]></text>
+						<value><![CDATA[0]]></value>
+					</choice>
+				</choices>
+			</field>
+			<field id="28" size="medium" type="html" displayOnly="1">
+				<content><![CDATA[<h2>Organizer Details (optional)</h2>]]></content>
+				<label><![CDATA[HTML Block]]></label>
+			</field>
+			<field id="29" size="medium" type="post_custom_field" postCustomFieldName="_OrganizerOrganizer" inputType="text">
+				<label><![CDATA[Organizer Name]]></label>
+			</field>
+			<field id="30" size="medium" type="post_custom_field" postCustomFieldName="_OrganizerPhone" inputType="phone" phoneFormat="standard">
+				<label><![CDATA[Phone]]></label>
+			</field>
+			<field id="31" size="medium" type="post_custom_field" postCustomFieldName="_OrganizerWebsite" inputType="website">
+				<label><![CDATA[Website]]></label>
+			</field>
+			<field id="32" size="medium" type="post_custom_field" postCustomFieldName="_OrganizerEmail" inputType="email">
+				<label><![CDATA[Email]]></label>
+			</field>
+			<field id="33" size="medium" type="html" displayOnly="1">
+				<content><![CDATA[<h2>Terms</h2>
+Put your terms and conditions here.]]></content>
+				<label><![CDATA[HTML Block]]></label>
+			</field>
+			<field id="34" isRequired="1" size="medium" type="checkbox">
+				<label><![CDATA[Please check that you have read and agree to the terms above.]]></label>
+				<choices>
+					<choice>
+						<text><![CDATA[Yes I have read and agree to the terms above]]></text>
+					</choice>
+				</choices>
+			</field>
+			<field id="35" size="medium" type="captcha" displayOnly="1">
+				<label><![CDATA[Captcha]]></label>
+			</field>
+		</fields>
+		<descriptionPlacement><![CDATA[below]]></descriptionPlacement>
+		<notification>
+			<to><![CDATA[{admin_email}]]></to>
+			<subject><![CDATA[New submission from {form_title}]]></subject>
+			<message><![CDATA[{all_fields}]]></message>
+		</notification>
+	</form>
+</forms>
