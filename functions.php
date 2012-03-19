@@ -12,9 +12,9 @@
 
 //  Add the action hook to format the GF form data into ECP event meta
 //  The GF form id is added to the "gform_pre_submission" hook so it only fires when that form is submitted
-add_action("gform_pre_submission_1", "format_tec_event_meta_from_gravity");
+add_action("gform_pre_submission_1", "format_ecp_event_meta_from_gravity");
 
-function format_tec_event_meta_from_gravity(){
+function format_ecp_event_meta_from_gravity(){
 
 	/*  VARIABLES - The following variables should correspond to their respective GF form elements IDs */
 	
@@ -166,9 +166,9 @@ function format_tec_event_meta_from_gravity(){
 
 
 // Store the new form values as ECP metadata when saving
-add_action('save_post', 'save_tec_event_meta_from_gravity', 11, 2);
+add_action('save_post', 'save_ecp_event_meta_from_gravity', 11, 2);
 
-function save_tec_event_meta_from_gravity($postId, $post) {
+function save_ecp_event_meta_from_gravity($postId, $post) {
 	if( class_exists('TribeEvents') ) {
 
 	// only continue if it's an event post
