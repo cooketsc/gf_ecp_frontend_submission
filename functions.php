@@ -153,7 +153,7 @@ function format_ecp_event_meta_from_gravity(){
 	if (isset($savedOrganizer)){
 		$_POST['organizer']['OrganizerID'] = $savedOrganizer->ID;
 	} else {
-		// If the venue doesn't exist, pass the venue meta needed to create a new venue
+		// If the organizer doesn't exist, pass the organizer meta needed to create a new organizer
 		$_POST['organizer']['Organizer'] = $_POST['input_'. $organizerName];
 		$_POST['organizer']['Phone'] = $_POST['input_'. $organizerPhone];
 
